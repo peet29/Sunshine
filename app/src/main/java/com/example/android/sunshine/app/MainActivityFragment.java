@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -31,7 +30,7 @@ public class MainActivityFragment extends Fragment {
         foreCastData.add("Sat - Sunny - 76/68");
         foreCastData.add("Sun - Sunny - 80/68");
 
-        List<String> weekForecast = foreCastData;
+        //List<String> weekForecast = foreCastData;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 R.layout.list_item_forecast,
