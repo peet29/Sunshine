@@ -52,7 +52,7 @@ public class ForecastFragment extends Fragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             FetchWeatherTask task = new FetchWeatherTask();
-            task.execute();
+            task.execute(94043);
             return true;
         }
 
@@ -86,11 +86,11 @@ public class ForecastFragment extends Fragment {
     }
 
 
-    public class FetchWeatherTask extends AsyncTask<Void, Void, Void> {
+    public class FetchWeatherTask extends AsyncTask<Integer, Void, Void> {
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Integer... passcode) {
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -112,7 +112,7 @@ public class ForecastFragment extends Fragment {
                         .appendPath("data").appendPath("2.5")
                         .appendPath("forecast")
                         .appendEncodedPath("daily")
-                        .appendQueryParameter("q","94043")
+                        .appendQueryParameter("q",passcode.toString())
                         .appendQueryParameter("mode","json")
                         .appendQueryParameter("units","metric")
                         .appendQueryParameter("cnt","7");
