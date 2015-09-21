@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -78,12 +79,12 @@ public class ForecastFragment extends Fragment {
         foreCastData.add("Sat - Sunny - 76/68");
         foreCastData.add("Sun - Sunny - 80/68");
 
-        //List<String> weekForecast = foreCastData;
+        List<String> weekForecast = foreCastData;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 R.layout.list_item_forecast,
                 R.id.list_item_forecast_textview,
-                foreCastData);
+                weekForecast);
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
         listView.setAdapter(adapter);
@@ -285,5 +286,7 @@ public class ForecastFragment extends Fragment {
 
             return null;
         }
+
+
     }
 }
