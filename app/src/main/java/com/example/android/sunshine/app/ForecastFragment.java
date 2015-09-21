@@ -73,7 +73,7 @@ public class ForecastFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ArrayList<String> foreCastData = new ArrayList<>();
+        final ArrayList<String> foreCastData = new ArrayList<>();
         foreCastData.add("Today - Sunny - 88/63");
         foreCastData.add("Tomorrow - Foggy - 70/46");
         foreCastData.add("Weds - Cloudy - 72/63");
@@ -96,8 +96,8 @@ public class ForecastFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
               // String forecast = mForecastAdapter.getItem(position);
                 //Toast.makeText(getActivity(),forecast,Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getActivity(), DetailActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT,foreCastData);
+                startActivity(intent);
             }
         });
 
