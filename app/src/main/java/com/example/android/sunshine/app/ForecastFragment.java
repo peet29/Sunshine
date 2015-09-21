@@ -91,7 +91,7 @@ public class ForecastFragment extends Fragment {
     }
 
 
-    public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
+    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
         /* The date/time conversion code is going to be moved outside the asynctask later,
@@ -194,7 +194,7 @@ public class ForecastFragment extends Fragment {
         }
 
         @Override
-        protected Void doInBackground(String... passcode) {
+        protected String[] doInBackground(String... passcode) {
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -202,6 +202,9 @@ public class ForecastFragment extends Fragment {
 
             // Will contain the raw JSON response as a string.
             String forecastJsonStr = null;
+            String format = "json";
+            String units = "metric";
+            int numDays = 7;
 
             try
 
@@ -271,6 +274,15 @@ public class ForecastFragment extends Fragment {
                     }
                 }
             }
+
+            try{
+                return getWeatherDataFromJson(forecastJsonStr,numDays);
+            }catch(JSONException e)
+            {
+                Log.e(LOG_TAG, e.getMessage(), e);
+                e.printStackTrace();
+            }
+
             return null;
         }
     }
