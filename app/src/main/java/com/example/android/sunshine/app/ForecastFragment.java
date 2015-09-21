@@ -291,9 +291,9 @@ public class ForecastFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String[] strings) {
-            for(int i = 0;i<strings.length;i++) {
-                mForecastAdapter.add(strings[i]);
+        protected void onPostExecute(String[] result) {
+            for(String dayForecastStr : result){
+                mForecastAdapter.add(dayForecastStr);
             }
         }
     }
