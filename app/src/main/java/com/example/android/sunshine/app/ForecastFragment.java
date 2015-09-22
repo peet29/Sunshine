@@ -37,6 +37,7 @@ import java.util.List;
 public class ForecastFragment extends Fragment {
 
     private ArrayAdapter<String> mForecastAdapter;
+
     public ForecastFragment() {
     }
 
@@ -64,6 +65,10 @@ public class ForecastFragment extends Fragment {
             FetchWeatherTask task = new FetchWeatherTask();
             task.execute("94043");
             return true;
+        } else if (id == R.id.action_settings) {
+            //add a setting
+            Intent intent = new Intent(getContext(), SettingsActivity.class);
+            startActivity(intent);
         }
 
 
@@ -94,8 +99,8 @@ public class ForecastFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               String forecast = mForecastAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT,forecast);
+                String forecast = mForecastAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
                 startActivity(intent);
             }
         });
@@ -286,10 +291,9 @@ public class ForecastFragment extends Fragment {
                 }
             }
 
-            try{
-                return getWeatherDataFromJson(forecastJsonStr,numDays);
-            }catch(JSONException e)
-            {
+            try {
+                return getWeatherDataFromJson(forecastJsonStr, numDays);
+            } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 e.printStackTrace();
             }
@@ -304,7 +308,7 @@ public class ForecastFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String[] result) {
-            for(String dayForecastStr : result){
+            for (String dayForecastStr : result) {
                 mForecastAdapter.add(dayForecastStr);
             }
         }
