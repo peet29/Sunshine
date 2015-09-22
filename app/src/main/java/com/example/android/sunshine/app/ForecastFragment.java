@@ -1,6 +1,8 @@
 package com.example.android.sunshine.app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -63,7 +65,9 @@ public class ForecastFragment extends Fragment {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             FetchWeatherTask task = new FetchWeatherTask();
-            task.execute("94043");
+            SharedPreferences userDetails = getContext().getSharedPreferences(String.valueOf(R.string.pref_location_key), Context.MODE_PRIVATE);
+            String location = userDetails.getString(String.valueOf(R.string.pref_location_key),"94043");
+            task.execute(location);
             return true;
         } else if (id == R.id.action_settings) {
             //add a setting
