@@ -64,10 +64,7 @@ public class ForecastFragment extends Fragment {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            FetchWeatherTask task = new FetchWeatherTask();
-            SharedPreferences userDetails = getContext().getSharedPreferences(String.valueOf(R.string.pref_location_key), Context.MODE_PRIVATE);
-            String location = userDetails.getString(String.valueOf(R.string.pref_location_key),"94043");
-            task.execute(location);
+            updateWeather();
             return true;
         } else if (id == R.id.action_settings) {
             //add a setting
@@ -113,6 +110,12 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
+    private void updateWeather(){
+        FetchWeatherTask task = new FetchWeatherTask();
+        SharedPreferences userDetails = getContext().getSharedPreferences(String.valueOf(R.string.pref_location_key), Context.MODE_PRIVATE);
+        String location = userDetails.getString(String.valueOf(R.string.pref_location_key),"94043");
+        task.execute(location);
+    }
 
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
