@@ -10,11 +10,13 @@
     <string name="pref_location_default" translatable="false" >94043</string>
 
     <!-- units -->
-    <string name="metric_text">Metric</string>
-    <string name="imperial_text">Imperial</string>
+    <string name="pref_units_metric_text">Metric</string>
+    <string name="pref_units_imperial_text">Imperial</string>
+    <string name="pref_units_key" translatable="false">unite</string>
+    <string name="pref_units_default">metric</string>
     <string name="pref_units_label">Pick your units </string>
-    <string-array name="Units">
-        <item>@string/metric_text</item>
-        <item>@string/imperial_text</item>
+    <string-array name="pref_units_item">
+        <item>@string/pref_units_metric_text</item>
+        <item>@string/pref_units_imperial_text</item>
     </string-array>
 </resources>

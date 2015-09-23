@@ -8,11 +8,11 @@
         android:singleLine="true"
         />
     <ListPreference
-        android:key="unit"
+        android:key="@string/pref_units_key"
         android:title="@string/pref_units_label"
-        android:entries="@array/Units"
-        android:entryValues="@array/Units"
-        android:defaultValue="0"
+        android:entries="@array/pref_units_item"
+        android:entryValues="@array/pref_units_item"
+        android:defaultValue="@string/pref_units_default"
         />
 
 </PreferenceScreen>

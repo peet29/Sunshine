@@ -1,11 +1,11 @@
 package com.example.android.sunshine.app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -108,9 +108,13 @@ public class ForecastFragment extends Fragment {
 
     private void updateWeather(){
         FetchWeatherTask task = new FetchWeatherTask();
-        SharedPreferences userDetails = getContext().getSharedPreferences(String.valueOf(R.string.pref_location_key), Context.MODE_PRIVATE);
-        String location = userDetails.getString(String.valueOf(R.string.pref_location_key),"94043");
-        task.execute(location);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = prefs.getString(getString(R.string.pref_location_key),getString(R.string.pref_location_default));
+        String units = prefs.getString(getString(R.string.pref_units_key),getString(R.string.pref_units_default));
+        String[] startData = new String[2];
+        startData[0] = location;
+        startData[1] = units;
+        task.execute(startData);
     }
 
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
@@ -213,16 +217,18 @@ public class ForecastFragment extends Fragment {
         }
 
         @Override
-        protected String[] doInBackground(String... passcode) {
+        protected String[] doInBackground(String... startData) {
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
             // Will contain the raw JSON response as a string.
+            String[] Data = startData;
             String forecastJsonStr = null;
             String format = "json";
-            String units = "metric";
+            String units = Data[1]; //units = metric / imperial
+            String passcode = Data[0];
             int numDays = 7;
 
 
@@ -239,9 +245,9 @@ public class ForecastFragment extends Fragment {
                         .appendPath("data").appendPath("2.5")
                         .appendPath("forecast")
                         .appendEncodedPath("daily")
-                        .appendQueryParameter("q", passcode[0])
-                        .appendQueryParameter("mode", "json")
-                        .appendQueryParameter("units", "metric")
+                        .appendQueryParameter("q", passcode)
+                        .appendQueryParameter("mode", format)
+                        .appendQueryParameter("units", units)
                         .appendQueryParameter("cnt", "7");
                 String myUrl = builder.build().toString();
                 URL url = new URL(myUrl);
