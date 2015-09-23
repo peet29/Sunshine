@@ -8,4 +8,13 @@
     <string name="pref_location_label">Location</string>
     <string name="pref_location_key" translatable="false" >location</string>
     <string name="pref_location_default" translatable="false" >94043</string>
+
+    <!-- units -->
+    <string name="metric_text">Metric</string>
+    <string name="imperial_text">Imperial</string>
+    <string name="pref_units_label">Pick your units </string>
+    <string-array name="Units">
+        <item>@string/metric_text</item>
+        <item>@string/imperial_text</item>
+    </string-array>
 </resources>
