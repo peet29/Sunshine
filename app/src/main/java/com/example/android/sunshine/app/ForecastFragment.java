@@ -249,7 +249,7 @@ public class ForecastFragment extends Fragment {
                         .appendQueryParameter("mode", format)
                         .appendQueryParameter("units", units)
                         .appendQueryParameter("cnt", "7")
-                        .appendQueryParameter("appid","4ca06e0f37732011543bf7cd3e6f6799");
+                        .appendQueryParameter("appid",getResources().getString(R.string.api_key));
                 String myUrl = builder.build().toString();
                 URL url = new URL(myUrl);
 
